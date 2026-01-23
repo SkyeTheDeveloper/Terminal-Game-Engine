@@ -1,5 +1,5 @@
-#include "SkyesUtils.h"
-#include "header.h"
+#include "lib/SkyesUtils.h"
+#include "CCT.h"
 
 const char player = '@';
 char map[7][7];
