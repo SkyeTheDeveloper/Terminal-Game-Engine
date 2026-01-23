@@ -1,5 +1,4 @@
-#include "SkyesUtils.h"
-#include <stdio.h>
+#include "CCT.h"
 
 void disp(char text[], bool question) {
     int length = strlen(text);
