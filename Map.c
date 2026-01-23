@@ -1,4 +1,4 @@
-#include "header.h"
+#include "CCT.h"
 
 char map0[7][7] = {
     {'#', '#', '#', '#', '#', '#', '#'},

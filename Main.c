@@ -1,5 +1,4 @@
-#include "SkyesUtils.h"
-#include "header.h"
+#include "CCT.h"
 
 char *menu_options[4];
 int menu_index = 0;
