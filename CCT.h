@@ -1,9 +1,8 @@
-#ifndef SkyesUtils
-#define SkyesUtils
+#ifndef CCT
+#define CCT
 
 #define length(arr) sizeof(arr) / sizeof(arr[0])
 
-#include "lib/SkyesUtils.h"
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
