@@ -1,27 +1,34 @@
 #include "CGame.h"
 
-const char player = '@';
-char map[7][7];
-int position[2];
-int world_number = 0;
-bool active = true;
+struct WorldData {
+    char player;
+    char map[7][7];
+    int position[2];
+    int world_number;
+    bool active;
+};
+
+struct WorldData wd;
 
 void game_loop();
 void render_map();
 void movement(int delta_x, int delta_y);
 void next_map();
-
+    
 void initialize() {
-    memcpy(map, map0, sizeof(map));
-    position[0] = 3;
-    position[1] = 3;
-    map[position[1]][position[0]] = player;
+    wd.player  = '@';
+    wd.world_number = 0;
+    wd.active = true;
+    memcpy(wd.map, map0, sizeof(wd.map));
+    wd.position[0] = 3;
+    wd.position[1] = 3;
+    wd.map[wd.position[1]][wd.position[0]] = wd.player;
     game_loop();
 }
 
 void game_loop() {
     char input;
-    while (active) {
+    while (wd.active) {
         render_map();
         input = getch();
         switch (input) {
@@ -47,34 +54,34 @@ void game_loop() {
 
 void render_map() {
     clear();
-    for (int i = 0; i < length(map); i++) {
-        for (int j = 0; j < length(map[i]); j++) {
-            printf("%c ", map[i][j]);
+    for (int i = 0; i < length(wd.map); i++) {
+        for (int j = 0; j < length(wd.map[i]); j++) {
+            printf("%c ", wd.map[i][j]);
         }
         printf("\n");
     }
 }
 
 void movement(int delta_x, int delta_y) {
-    int x = position[0];
-    int y = position[1];
+    int x = wd.position[0];
+    int y = wd.position[1];
     int target_x = x + delta_x;
     int target_y = y + delta_y;
-    char target_tile = map[target_y][target_x];
+    char target_tile = wd.map[target_y][target_x];
     if (target_tile == ' ') {
-        map[y][x] = ' ';
-        position[0] += delta_x;
-        position[1] += delta_y;
-        map[target_y][target_x] = player;
+        wd.map[y][x] = ' ';
+        wd.position[0] += delta_x;
+        wd.position[1] += delta_y;
+        wd.map[target_y][target_x] = wd.player;
     }
 }
 
 void next_map() {
-    world_number++;
-    switch (world_number) {
+    wd.world_number++;
+    switch (wd.world_number) {
         case 1:
             disp("You win!", false);
-            active = false;
+            wd.active = false;
             printf("\e[?25h");
             break;
         default:

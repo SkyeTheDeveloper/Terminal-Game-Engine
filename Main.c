@@ -1,12 +1,15 @@
 #include "CGame.h"
 
-char *menu_options[4];
-int menu_index = 0;
-bool menu_active = true;
+struct MenuData {
+    char *menu_options[4];
+    int menu_index;
+    bool menu_active;
+};
 
 #ifdef _WIN32
     UINT def_cp;
 #endif
+struct MenuData md;
 
 void display_menu();
 void handle_input(int selection);
@@ -19,6 +22,8 @@ int main() {
         def_cp = GetConsoleOutputCP();
         SetConsoleOutputCP(CP_UTF8);
     #endif
+    md.menu_index = 0;
+    md.menu_active = true;
     main_menu();
     return 0;
 }
@@ -26,28 +31,28 @@ int main() {
 void main_menu() {
     printf("\e[?25l");
     char *main_options[4] = {"Start Game", "Settings", "Credits", "Exit Game"};
-    memcpy(menu_options, main_options, sizeof(menu_options));
+    memcpy(md.menu_options, main_options, sizeof(md.menu_options));
     char input;
-    while (menu_active) {
+    while (md.menu_active) {
         display_menu();
         input = getch();
         switch (input) {
             case 'w':
-                menu_index--;
-                if (menu_index < 0) {
-                    menu_index = 0;
+                md.menu_index--;
+                if (md.menu_index < 0) {
+                    md.menu_index = 0;
                 }
                 break;
             case 's':
-                menu_index++;
-                if (menu_index > 3) {
-                    menu_index = 3;
+                md.menu_index++;
+                if (md.menu_index > 3) {
+                    md.menu_index = 3;
                 }
                 break;
             case 10:
             case 13:
-                menu_active = false;
-                handle_input(menu_index);
+                md.menu_active = false;
+                handle_input(md.menu_index);
                 break;
         }
     }
@@ -56,11 +61,11 @@ void main_menu() {
 void display_menu() {
     clear();
     printf("   █████████\n  ███░░░░░███\n ███     ░░░\n░███\n░███\n░░███     ███\n ░░█████████\n  ░░░░░░░░░\n\n   █████████\n  ███░░░░░███\n ███     ░░░   ██████   █████████████    ██████\n░███          ░░░░░███ ░░███░░███░░███  ███░░███\n░███    █████  ███████  ░███ ░███ ░███ ░███████\n░░███  ░░███  ███░░███  ░███ ░███ ░███ ░███░░░\n ░░█████████ ░░████████ █████░███ █████░░██████\n  ░░░░░░░░░   ░░░░░░░░ ░░░░░ ░░░ ░░░░░  ░░░░░░\n");
-    for (int i = 0; i < length(menu_options); i++) {
-      if (i == menu_index) {
-        printf("> %s <\n", menu_options[i]);
+    for (int i = 0; i < length(md.menu_options); i++) {
+      if (i == md.menu_index) {
+        printf("> %s <\n", md.menu_options[i]);
       } else {
-        printf("%s\n", menu_options[i]);
+        printf("%s\n", md.menu_options[i]);
       }
     }
 }
