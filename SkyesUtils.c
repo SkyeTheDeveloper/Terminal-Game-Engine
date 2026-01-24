@@ -1,4 +1,4 @@
-#include "CCT.h"
+#include "CGame.h"
 
 #ifndef _WIN32
     int getch() {

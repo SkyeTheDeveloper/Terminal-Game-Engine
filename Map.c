@@ -1,4 +1,4 @@
-#include "CCT.h"
+#include "CGame.h"
 
 char map0[7][7] = {
     {'#', '#', '#', '#', '#', '#', '#'},

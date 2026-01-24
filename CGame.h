@@ -1,5 +1,5 @@
-#ifndef CCT
-#define CCT
+#ifndef CGame
+#define CGame
 
 #define length(arr) sizeof(arr) / sizeof(arr[0])
 

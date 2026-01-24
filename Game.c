@@ -1,4 +1,4 @@
-#include "CCT.h"
+#include "CGame.h"
 
 const char player = '@';
 char map[7][7];

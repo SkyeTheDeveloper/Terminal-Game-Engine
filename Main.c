@@ -1,4 +1,4 @@
-#include "CCT.h"
+#include "CGame.h"
 
 char *menu_options[4];
 int menu_index = 0;
