@@ -9,6 +9,7 @@ int main() {
 }
 
 void main_menu() {
+    printf("\e[?25l");
     char *main_options[4] = {"Start Game", "Settings", "Credits", "Exit Game"};
     memcpy(menu_options, main_options, sizeof(menu_options));
     char input;
@@ -76,4 +77,5 @@ void credits() {
 
 void exit_game() {
     disp("Thanks for playing!", false);
+    printf("\e[?25h");
 }

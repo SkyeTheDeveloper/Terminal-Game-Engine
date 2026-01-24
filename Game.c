@@ -70,6 +70,10 @@ void next_map() {
         case 1:
             disp("You win!", false);
             active = false;
+            printf("\e[?25h");
+            break;
+        default:
+            initialize();
             break;
     }
 }
