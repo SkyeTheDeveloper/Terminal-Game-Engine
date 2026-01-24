@@ -4,8 +4,23 @@ char *menu_options[4];
 int menu_index = 0;
 bool menu_active = true;
 
+#ifdef _WIN32
+    UINT def_cp;
+#endif
+
+void display_menu();
+void handle_input(int selection);
+void settings();
+void credits();
+void exit_game();
+
 int main() {
+    #ifdef _WIN32
+        def_cp = GetConsoleOutputCP();
+        SetConsoleOutputCP(CP_UTF8);
+    #endif
     main_menu();
+    return 0;
 }
 
 void main_menu() {
@@ -78,4 +93,7 @@ void credits() {
 void exit_game() {
     disp("Thanks for playing!", false);
     printf("\e[?25h");
+    #ifdef _WIN32
+        SetConsoleOutputCP(def_cp);
+    #endif
 }

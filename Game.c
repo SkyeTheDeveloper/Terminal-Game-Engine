@@ -6,6 +6,11 @@ int position[2];
 int world_number = 0;
 bool active = true;
 
+void game_loop();
+void render_map();
+void movement(int delta_x, int delta_y);
+void next_map();
+
 void initialize() {
     memcpy(map, map0, sizeof(map));
     position[0] = 3;
