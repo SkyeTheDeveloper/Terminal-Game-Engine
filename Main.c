@@ -14,7 +14,7 @@ void main_menu() {
     char input;
     while (menu_active) {
         display_menu();
-        scanf(" %c", &input);
+        input = getch();
         switch (input) {
             case 'w':
                 menu_index--;
@@ -28,7 +28,8 @@ void main_menu() {
                     menu_index = 3;
                 }
                 break;
-            case 'e':
+            case 10:
+            case 13:
                 menu_active = false;
                 handle_input(menu_index);
                 break;

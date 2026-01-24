@@ -18,7 +18,7 @@ void game_loop() {
     char input;
     while (active) {
         render_map();
-        scanf(" %c", &input);
+        input = getch();
         switch (input) {
             case 'w':
                 movement(0, -1);
@@ -32,7 +32,8 @@ void game_loop() {
             case 'd':
                 movement(1, 0);
                 break;
-            case 'e':
+            case 10:
+            case 13:
                 next_map();
                 break;
         }

@@ -1,5 +1,19 @@
 #include "CCT.h"
 
+#ifndef _WIN32
+    int getch() {
+        struct termios oldt, newt;
+        int ch;
+        tcgetattr(STDIN_FILENO, &oldt);
+        newt = oldt;
+        newt.c_lflag &= ~(ICANON | ECHO);
+        tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+        ch = getchar();
+        tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+        return ch;
+    }
+#endif
+
 void disp(char text[], bool question) {
     int length = strlen(text);
     for (int i = 0; i < length; i++) {
