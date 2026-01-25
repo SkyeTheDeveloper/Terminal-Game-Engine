@@ -1,6 +1,7 @@
 /* Map.h
  * Author(s): Skylar Koningin
  * Description: Provides access to the maps
+ * Indentation Style: None
  */
 
 #ifndef MAP

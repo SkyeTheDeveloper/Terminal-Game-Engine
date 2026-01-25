@@ -1,6 +1,7 @@
 /* Game.h
  * Author(s): Skylar Koningin
  * Description: Provides access to the main_menu() function
+ * Indentation Style: None
  */
 
 #ifndef MAIN_MENU

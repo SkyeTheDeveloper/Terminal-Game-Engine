@@ -1,9 +1,11 @@
 /* Map.c
  * Author(s): Skylar Koningin
  * Description: Provides all of the maps used in the game
+ * Indetation Style: Allman
  */
 
-char map0[7][7] = {
+char map0[7][7] = 
+{
     {'#', '#', '#', '#', '#', '#', '#'},
     {'#', '.', '#', '.', '.', '.', '#'},
     {'#', '.', '#', '.', '#', '.', '#'},

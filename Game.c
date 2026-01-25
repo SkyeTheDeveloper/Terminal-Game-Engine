@@ -1,12 +1,16 @@
 /* Game.c
  * Author(s): Skylar Koningin
  * Description: Provides the basic game logic
+ * Indetation Style: Allman
  */
 
+#include "MainMenu.h"
 #include "SkyesUtils.h"
+#include "sounds/Sounds.h"
 #include "Map.h"
 
-struct WorldData {
+struct WorldData
+{
     char player;
     char t_floor;
     char map[7][7];
@@ -22,8 +26,11 @@ void game_loop(void);
 void render_map(void);
 void movement(int delta_x, int delta_y);
 void next_map(void);
+
+void initialize(void)
+{
+    progress_bar(22);
     
-void initialize(void) {
     wd.player  = '@';
     wd.t_floor = ' ';
     wd.world_number = 0;
@@ -37,12 +44,15 @@ void initialize(void) {
     game_loop();
 }
 
-void game_loop(void) {
+void game_loop(void)
+{
     char input;
-    while (wd.active) {
+    while (wd.active)
+    {
         render_map();
         input = getch();
-        switch (input) {
+        switch (input)
+        {
             case 'w':
                 movement(0, -1);
                 break;
@@ -59,10 +69,13 @@ void game_loop(void) {
     }
 }
 
-void render_map(void) {
+void render_map(void)
+{
     clear();
-    for (int i = 0; i < length(wd.map); i++) {
-        for (int j = 0; j < length(wd.map[i]); j++) {
+    for (int i = 0; i < length(wd.map); i++)
+    {
+        for (int j = 0; j < length(wd.map[i]); j++)
+        {
             printf("%c ", wd.map[i][j]);
         }
         printf("\n");
@@ -71,17 +84,22 @@ void render_map(void) {
     printf("%d\n", wd.score);
 }
 
-void movement(int delta_x, int delta_y) {
+void movement(int delta_x, int delta_y)
+{
     int x = wd.position[0];
     int y = wd.position[1];
     int target_x = x + delta_x;
     int target_y = y + delta_y;
     char target_tile = wd.map[target_y][target_x];
     
-    if (target_tile == '.' || target_tile == wd.t_floor || target_tile == '*') {
+    if (target_tile == '.' || target_tile == wd.t_floor || target_tile == '*')
+    {
         wd.map[y][x] = ' ';
         
-        if (target_tile == '.') {
+        sound("movement", movement_mp3, movement_len);
+        
+        if (target_tile == '.')
+        {
             wd.score++;
         }
         
@@ -89,21 +107,28 @@ void movement(int delta_x, int delta_y) {
         wd.position[1] += delta_y;
         wd.map[target_y][target_x] = wd.player;
         
-        if (target_tile == '*') {
+        if (target_tile == '*')
+        {
             next_map();
         }
     }
 }
 
-void next_map(void) {
+void next_map(void)
+{
     render_map();
     
     wd.world_number++;
-    switch (wd.world_number) {
-        case 1:
+    switch (wd.world_number)
+    {
+        case 1: // only defined as one since there is no good way to get the total map count
             disp("You win!", false);
             wd.active = false;
-            printf("\e[?25h");
+            
+            eep(1);
+            
+            progress_bar(22);
+            main_menu();
             break;
         default:
             initialize();

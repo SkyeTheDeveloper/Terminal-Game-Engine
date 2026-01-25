@@ -4,7 +4,7 @@ If you would like to contribute to this repo, there are a few stylistic things t
 ## Formatting and Layout
 ### Indentation Style
 - Indentations must be consistent for the entire file (e.g. having a single if statement use K&R when the rest of the file is Allman)
-- K&R or Allman is preferred
+- 1TBS/OTBS/Java, K&R, or Allman is preferred
 
 ### Whitespace
 - Always add a space between operators (e.g. x += y or x || y; only exception is "!x")
@@ -27,9 +27,8 @@ If you would like to contribute to this repo, there are a few stylistic things t
 
 ## Commenting
 ### Explanations
-- Add a comment directly above to explain what your functions do, their inputs, and returns
-- Also explain why the block is necessary
-- Feel free to add funny snippets if you would like, just do not spam them
+- Add a comment directly above methods that do something that is not instantly obvious
+- Add comments to "magic numbers" if they are needed (see Programming Practices requirement 3)
 
 ### File Headers
 - When you create a new file, make a header saying the file name, your name, and a brief description of what it does
@@ -37,6 +36,7 @@ If you would like to contribute to this repo, there are a few stylistic things t
 <pre>/* (file name).(extension)        
  * Author(s): (authors names here)
  * Description: (description here)
+ * Indentation Style: (brace style)
  */</pre>
 - If you contribute to a file, add your name to the list of authors for that file
 
@@ -47,7 +47,7 @@ If you would like to contribute to this repo, there are a few stylistic things t
 - Reduce functions to one use if possible to increase modularity
 - Reduce files to do one section of code (e.g. one file for the main menu, another for the game logic, etc.) to increase modularity
 - Create a new header file for each file and #include stuff only required for that one source file
-- Do not prototype all functions in the header file, but instead prototype only the ones needed outside of it in the header and prototype the others above the first function of the source file
+- Do not prototype all functions in the header file, but instead prototype only the ones needed outside of the source file in the header and prototype the others above the first function of the source file
 - Reduce the use of external libraries and headers if possible, if not, include their license in a licenses folder
 - If a method does not have any arguments, always put void in the definition and the prototype, but it is never required when calling the function
 

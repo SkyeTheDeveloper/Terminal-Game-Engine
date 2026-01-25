@@ -1,6 +1,7 @@
 /* Game.h
  * Author(s): Skylar Koningin
  * Description: Provides access to the initialize() function
+ * Indentation Style: None
  */
 
 #ifndef GAME

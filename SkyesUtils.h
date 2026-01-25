@@ -1,6 +1,7 @@
 /* SkyesUtils.h
  * Author(s): Skylar Koningin
  * Description: Provides access to all of the functions
+ * Indentation Style: None
  */
 
 #ifndef SKYES_UTILS
@@ -11,11 +12,12 @@
 #include <string.h>
 
 #define length(arr) sizeof(arr) / sizeof(arr[0])
+
 #ifdef _WIN32
     #include <conio.h>
     #include <windows.h>
     
-    #define eep(s) Sleep((DWORD)((s) * 1000))
+   #define eep(s) Sleep((DWORD)((s) * 1000))
 #else
     #include <termios.h>
     #include <unistd.h>
@@ -25,8 +27,12 @@
     int getch(void);
 #endif
 
-void disp(char text[], bool question);
+#include "miniaudio.h"
+extern ma_engine engine;
+
+void disp(char *text, bool question);
 void progress_bar(int length);
 void clear(void);
+void sound(const char* sound_name, unsigned char* sound_file, unsigned int size);
 
 #endif
