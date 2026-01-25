@@ -34,10 +34,10 @@ If you would like to contribute to this repo, there are a few stylistic things t
 ### File Headers
 - When you create a new file, make a header saying the file name, your name, and a brief description of what it does
 - Header should look like this
-- `/* (file name).(extension)        `
-- ` * Author(s): (authors names here)`
-- ` * Description: (description here)`
-- ` */                               `
+<pre>/* (file name).(extension)        
+ * Author(s): (authors names here)
+ * Description: (description here)
+ */</pre>
 - If you contribute to a file, add your name to the list of authors for that file
 
 ## Programming Practices
