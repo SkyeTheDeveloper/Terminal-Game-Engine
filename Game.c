@@ -1,9 +1,17 @@
-#include "CGame.h"
+/* Game.c
+ * Author(s): Skylar Koningin
+ * Description: Provides the basic game logic
+ */
+
+#include "SkyesUtils.h"
+#include "Map.h"
 
 struct WorldData {
     char player;
+    char t_floor;
     char map[7][7];
     int position[2];
+    int score;
     int world_number;
     bool active;
 };
@@ -17,12 +25,15 @@ void next_map(void);
     
 void initialize(void) {
     wd.player  = '@';
+    wd.t_floor = ' ';
     wd.world_number = 0;
-    wd.active = true;
+    wd.score++;
     memcpy(wd.map, map0, sizeof(wd.map));
-    wd.position[0] = 3;
-    wd.position[1] = 3;
+    wd.position[0] = 1;
+    wd.position[1] = 1;
     wd.map[wd.position[1]][wd.position[0]] = wd.player;
+    wd.active = true;
+    
     game_loop();
 }
 
@@ -44,10 +55,6 @@ void game_loop(void) {
             case 'd':
                 movement(1, 0);
                 break;
-            case 10:
-            case 13:
-                next_map();
-                break;
         }
     }
 }
@@ -60,6 +67,8 @@ void render_map(void) {
         }
         printf("\n");
     }
+    printf("(%d,%d)\n", wd.position[0], wd.position[1]);
+    printf("%d\n", wd.score);
 }
 
 void movement(int delta_x, int delta_y) {
@@ -68,15 +77,27 @@ void movement(int delta_x, int delta_y) {
     int target_x = x + delta_x;
     int target_y = y + delta_y;
     char target_tile = wd.map[target_y][target_x];
-    if (target_tile == ' ') {
+    
+    if (target_tile == '.' || target_tile == wd.t_floor || target_tile == '*') {
         wd.map[y][x] = ' ';
+        
+        if (target_tile == '.') {
+            wd.score++;
+        }
+        
         wd.position[0] += delta_x;
         wd.position[1] += delta_y;
         wd.map[target_y][target_x] = wd.player;
+        
+        if (target_tile == '*') {
+            next_map();
+        }
     }
 }
 
 void next_map(void) {
+    render_map();
+    
     wd.world_number++;
     switch (wd.world_number) {
         case 1:

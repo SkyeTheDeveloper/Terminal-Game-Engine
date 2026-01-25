@@ -1,5 +1,11 @@
-#include "CGame.h"
+/* MainMenu.c
+ * Author(s): Skylar Koningin
+ * Description: Serves as the entry point and Main Menu for the game
+ */
 
+#include "SkyesUtils.h"
+#include "MainMenu.h"
+#include "Game.h"
 struct MenuData {
     char *menu_options[4];
     int menu_index;
@@ -22,19 +28,26 @@ int main(void) {
         def_cp = GetConsoleOutputCP();
         SetConsoleOutputCP(CP_UTF8);
     #endif
+    
     md.menu_index = 0;
     md.menu_active = true;
+    
     main_menu();
+    
     return 0;
 }
 
 void main_menu(void) {
     printf("\e[?25l");
+    
     char *main_options[4] = {"Start Game", "Settings", "Credits", "Exit Game"};
+    
     memcpy(md.menu_options, main_options, sizeof(md.menu_options));
+    
     char input;
     while (md.menu_active) {
         display_menu();
+        
         input = getch();
         switch (input) {
             case 'w':
@@ -45,8 +58,8 @@ void main_menu(void) {
                 break;
             case 's':
                 md.menu_index++;
-                if (md.menu_index > 3) {
-                    md.menu_index = 3;
+                if (md.menu_index > length(main_options)) {
+                    md.menu_index = length(main_options);
                 }
                 break;
             case 10:
@@ -60,7 +73,9 @@ void main_menu(void) {
 
 void display_menu(void) {
     clear();
+    
     printf("   █████████\n  ███░░░░░███\n ███     ░░░\n░███\n░███\n░░███     ███\n ░░█████████\n  ░░░░░░░░░\n\n   █████████\n  ███░░░░░███\n ███     ░░░   ██████   █████████████    ██████\n░███          ░░░░░███ ░░███░░███░░███  ███░░███\n░███    █████  ███████  ░███ ░███ ░███ ░███████\n░░███  ░░███  ███░░███  ░███ ░███ ░███ ░███░░░\n ░░█████████ ░░████████ █████░███ █████░░██████\n  ░░░░░░░░░   ░░░░░░░░ ░░░░░ ░░░ ░░░░░  ░░░░░░\n");
+    
     for (int i = 0; i < length(md.menu_options); i++) {
       if (i == md.menu_index) {
         printf("> %s <\n", md.menu_options[i]);
@@ -98,6 +113,7 @@ void credits(void) {
 void exit_game(void) {
     disp("Thanks for playing!", false);
     printf("\e[?25h");
+    
     #ifdef _WIN32
         SetConsoleOutputCP(def_cp);
     #endif

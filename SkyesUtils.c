@@ -1,4 +1,12 @@
-#include "CGame.h"
+/* SkyesUtils.c
+ * Author(s): Skylar Koningin
+ * Description: A small, custom-coded library of my most common functions
+ */
+
+#include "SkyesUtils.h"
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
 
 #ifndef _WIN32
     int getch(void) {
