@@ -1,7 +1,7 @@
 #include "CGame.h"
 
 #ifndef _WIN32
-    int getch() {
+    int getch(void) {
         struct termios oldt, newt;
         int ch;
         tcgetattr(STDIN_FILENO, &oldt);
@@ -40,7 +40,7 @@ void progress_bar(int length) {
     eep(2);
 }
 
-void clear() {
+void clear(void) {
     printf("\033[H\033[2J");
     fflush(stdout);
 }

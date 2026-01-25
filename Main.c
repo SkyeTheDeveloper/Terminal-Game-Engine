@@ -11,13 +11,13 @@ struct MenuData {
 #endif
 struct MenuData md;
 
-void display_menu();
+void display_menu(void);
 void handle_input(int selection);
-void settings();
-void credits();
-void exit_game();
+void settings(void);
+void credits(void);
+void exit_game(void);
 
-int main() {
+int main(void) {
     #ifdef _WIN32
         def_cp = GetConsoleOutputCP();
         SetConsoleOutputCP(CP_UTF8);
@@ -28,7 +28,7 @@ int main() {
     return 0;
 }
 
-void main_menu() {
+void main_menu(void) {
     printf("\e[?25l");
     char *main_options[4] = {"Start Game", "Settings", "Credits", "Exit Game"};
     memcpy(md.menu_options, main_options, sizeof(md.menu_options));
@@ -58,7 +58,7 @@ void main_menu() {
     }
 }
 
-void display_menu() {
+void display_menu(void) {
     clear();
     printf("   █████████\n  ███░░░░░███\n ███     ░░░\n░███\n░███\n░░███     ███\n ░░█████████\n  ░░░░░░░░░\n\n   █████████\n  ███░░░░░███\n ███     ░░░   ██████   █████████████    ██████\n░███          ░░░░░███ ░░███░░███░░███  ███░░███\n░███    █████  ███████  ░███ ░███ ░███ ░███████\n░░███  ░░███  ███░░███  ░███ ░███ ░███ ░███░░░\n ░░█████████ ░░████████ █████░███ █████░░██████\n  ░░░░░░░░░   ░░░░░░░░ ░░░░░ ░░░ ░░░░░  ░░░░░░\n");
     for (int i = 0; i < length(md.menu_options); i++) {
@@ -87,15 +87,15 @@ void handle_input(int selection) {
     }
 }
 
-void settings() {
+void settings(void) {
     disp("There are no settings right now", false);
 }
 
-void credits() {
+void credits(void) {
     disp("There are no credits right now", false);
 }
 
-void exit_game() {
+void exit_game(void) {
     disp("Thanks for playing!", false);
     printf("\e[?25h");
     #ifdef _WIN32

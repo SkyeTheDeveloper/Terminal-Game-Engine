@@ -10,12 +10,12 @@ struct WorldData {
 
 struct WorldData wd;
 
-void game_loop();
-void render_map();
+void game_loop(void);
+void render_map(void);
 void movement(int delta_x, int delta_y);
-void next_map();
+void next_map(void);
     
-void initialize() {
+void initialize(void) {
     wd.player  = '@';
     wd.world_number = 0;
     wd.active = true;
@@ -26,7 +26,7 @@ void initialize() {
     game_loop();
 }
 
-void game_loop() {
+void game_loop(void) {
     char input;
     while (wd.active) {
         render_map();
@@ -52,7 +52,7 @@ void game_loop() {
     }
 }
 
-void render_map() {
+void render_map(void) {
     clear();
     for (int i = 0; i < length(wd.map); i++) {
         for (int j = 0; j < length(wd.map[i]); j++) {
@@ -76,7 +76,7 @@ void movement(int delta_x, int delta_y) {
     }
 }
 
-void next_map() {
+void next_map(void) {
     wd.world_number++;
     switch (wd.world_number) {
         case 1:
