@@ -1,7 +1,10 @@
 # Style Guide
 If you would like to contribute to this repo, there are a few stylistic things that must be taken care of
 
+
+
 ## Formatting and Layout
+
 ### Indentation Style
 - Indentations must be consistent for the entire file (e.g. having a single if statement use K&R when the rest of the file is Allman)
 - 1TBS/OTBS/Java, K&R, or Allman is preferred
@@ -15,7 +18,10 @@ If you would like to contribute to this repo, there are a few stylistic things t
 ### Line Length
 - Try and stay below 100 characters per line, but its not enforced unless its incredibly long
 
+
+
 ## Naming Conventions
+
 ### Cases
 - Variables and Functions should use snake_case
 - Filenames, Structs, and Enums should use PascalCase
@@ -25,7 +31,10 @@ If you would like to contribute to this repo, there are a few stylistic things t
 ### Descriptiveness
 - Use descriptive names for everything (e.g. "car_count" as opposed to "var2" or "MainMenu.c" instead of "file1.c")
 
+
+
 ## Commenting
+
 ### Explanations
 - Add a comment directly above methods that do something that is not instantly obvious
 - Add comments to "magic numbers" if they are needed (see Programming Practices requirement 3)
@@ -40,6 +49,8 @@ If you would like to contribute to this repo, there are a few stylistic things t
  */</pre>
 - If you contribute to a file, add your name to the list of authors for that file
 
+
+
 ## Programming Practices
 - Use constants when possible
 - Minimize the scope of a variable and declare it as close to its first use as possible
@@ -51,7 +62,9 @@ If you would like to contribute to this repo, there are a few stylistic things t
 - Reduce the use of external libraries and headers if possible, if not, include their license in a licenses folder
 - If a method does not have any arguments, always put void in the definition and the prototype, but it is never required when calling the function
 
+
+
 ## Compiler and Portability
-- add `-Wall -Wextra -Wpedantic` to your compilation args to see all warnings, and treat every one as an error
+- add `-Wall -Wextra -Wpedantic` to your compilation args to see all warnings, and treat every one as an error (Unless you have an editor that displays those)
 - Do not commit and push until the program fully works
 - Use the newest standard of C possible unless there is a catastrophic issue with it

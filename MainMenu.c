@@ -22,9 +22,9 @@ struct MenuData
 #endif
 struct MenuData md;
 
-
 void display_menu(void);
 void handle_input(int selection);
+void game_start(void);
 void settings(void);
 void credits(void);
 void exit_game(void);
@@ -105,7 +105,7 @@ void display_menu(void)
 {
     clear();
     
-    printf("   █████████\n  ███░░░░░███\n ███     ░░░\n░███\n░███\n░░███     ███\n ░░█████████\n  ░░░░░░░░░\n\n   █████████\n  ███░░░░░███\n ███     ░░░   ██████   █████████████    ██████\n░███          ░░░░░███ ░░███░░███░░███  ███░░███\n░███    █████  ███████  ░███ ░███ ░███ ░███████\n░░███  ░░███  ███░░███  ░███ ░███ ░███ ░███░░░\n ░░█████████ ░░████████ █████░███ █████░░██████\n  ░░░░░░░░░   ░░░░░░░░ ░░░░░ ░░░ ░░░░░  ░░░░░░\n");
+    printf("   █████████\n  ███░░░░░███\n ███     ░░░   ██████   █████████████    ██████\n░███          ░░░░░███ ░░███░░███░░███  ███░░███\n░███    █████  ███████  ░███ ░███ ░███ ░███████\n░░███  ░░███  ███░░███  ░███ ░███ ░███ ░███░░░\n ░░█████████ ░░████████ █████░███ █████░░██████\n  ░░░░░░░░░   ░░░░░░░░ ░░░░░ ░░░ ░░░░░  ░░░░░░\n");
     
     for (int i = 0; i < length(md.menu_options); i++)
     {
@@ -140,17 +140,22 @@ void handle_input(int selection)
     }
 }
 
-
 void settings(void)
 {
     disp("There are no settings right now", false);
+    eep(1);
     md.menu_active = true;
 }
 
 
 void credits(void)
 {
-    disp("There are no credits right now", false);
+    clear();
+    disp("Lead Developer:\nSkylar Koningin (github.com/SkyeTheDeveloper)\n\nAudio Files:\nPixabay (pixabay.com)\n\nAudio Playback (via miniaudio):\nDavid Reid (github.com/mackron/miniaudio)\n\nMap Generation:\nASCII Art Archive (asciiart.eu)\n\n\n", false);
+    eep(3);
+    disp("Thanks for using our code!", false);
+    eep(3);
+    md.menu_index = 0;
     md.menu_active = true;
 }
 
@@ -158,6 +163,7 @@ void credits(void)
 void exit_game(void)
 {
     disp("Thanks for playing!", false);
+    eep(1);
     printf("\e[?25h");
     
     #ifdef _WIN32

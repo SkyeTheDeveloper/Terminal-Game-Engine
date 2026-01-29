@@ -4,7 +4,6 @@
  * Indetation Style: Allman
  */
 
-#define MA_NO_COREAUDIO
 #define MINIAUDIO_IMPLEMENTATION
 #include "miniaudio.h"
 
