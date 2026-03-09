@@ -4,15 +4,23 @@
  * Indetation Style: Allman
  */
 
-#include "SkyesUtils.h"
+#include "SkyesUtils.hpp"
 #include "miniaudio.h"
 #include "sounds/Sounds.h"
-#include "MainMenu.h"
-#include "Game.h"
+#include "MainMenu.hpp"
+#include "Game.hpp"
+#include <iostream>
+#include <vector>
 
 struct MenuData
 {
-    char *menu_options[4];
+    std::vector<std::string> menu_options = 
+    {
+        "Start Game",
+        "Settings", 
+        "Credits", 
+        "Exit Game"
+    };
     int menu_index;
     bool menu_active;
 };
@@ -52,13 +60,6 @@ void main_menu(void)
     
     printf("\e[?25l");
     
-    char *main_options[4] = 
-    {
-        "Start Game", "Settings", "Credits", "Exit Game"
-    };
-    
-    memcpy(md.menu_options, main_options, sizeof(md.menu_options));
-    
     char input;
     while (md.menu_active)
     {
@@ -80,9 +81,9 @@ void main_menu(void)
                 break;
             case 's':
                 md.menu_index++;
-                if (md.menu_index > length(main_options) - 1)
+                if (md.menu_index > md.menu_options.size() - 1)
                 {
-                    md.menu_index = length(main_options) - 1;
+                    md.menu_index = md.menu_options.size() - 1;
                 }
                 else 
                 {
@@ -107,15 +108,15 @@ void display_menu(void)
     
     printf("   █████████\n  ███░░░░░███\n ███     ░░░   ██████   █████████████    ██████\n░███          ░░░░░███ ░░███░░███░░███  ███░░███\n░███    █████  ███████  ░███ ░███ ░███ ░███████\n░░███  ░░███  ███░░███  ░███ ░███ ░███ ░███░░░\n ░░█████████ ░░████████ █████░███ █████░░██████\n  ░░░░░░░░░   ░░░░░░░░ ░░░░░ ░░░ ░░░░░  ░░░░░░\n");
     
-    for (int i = 0; i < length(md.menu_options); i++)
+    for (int i = 0; i < md.menu_options.size(); i++)
     {
       if (i == md.menu_index)
       {
-        printf("> %s <\n", md.menu_options[i]);
+          std::cout << "> " << md.menu_options[i] << " <" << std::endl;
       }
       else
       {
-        printf("%s\n", md.menu_options[i]);
+        std::cout << md.menu_options[i] << std::endl;
       }
     }
 }
@@ -164,7 +165,7 @@ void exit_game(void)
 {
     disp("Thanks for playing!", false);
     eep(1);
-    printf("\e[?25h");
+    std::cout.flush() << "\e[?25h";
     
     #ifdef _WIN32
         SetConsoleOutputCP(def_cp);

@@ -4,19 +4,21 @@
  * Indetation Style: Allman
  */
 
-#include "MainMenu.h"
-#include "SkyesUtils.h"
+#include "MainMenu.hpp"
+#include "SkyesUtils.hpp"
 #include "sounds/Sounds.h"
-#include "Map.h"
+#include "Map.hpp"
+#include <iostream>
+#include <vector>
 
 struct WorldData
 {
-    char player;
-    char t_floor;
-    char map[7][7];
+    char player = '@';
+    char t_floor = ' ';
+    std::vector<std::vector<char>> map;
     int position[2];
-    int score;
-    int world_number;
+    int score = 0;
+    int world_number = 0;
     bool active;
 };
 
@@ -31,11 +33,18 @@ void initialize(void)
 {
     progress_bar(22);
     
-    wd.player  = '@';
-    wd.t_floor = ' ';
-    wd.world_number = 0;
     wd.score++;
-    memcpy(wd.map, map0, sizeof(wd.map));
+    if (wd.world_number == 0) {
+        wd.map = map0;
+    } else if (wd.world_number == 1) {
+        wd.map = map1;
+    } else if (wd.world_number == 2) {
+        wd.map = map2;
+    } else if (wd.world_number == 3) {
+        wd.map = map3;
+    } else if (wd.world_number == 4) {
+        wd.map = map4;
+    }
     wd.position[0] = 1;
     wd.position[1] = 1;
     wd.map[wd.position[1]][wd.position[0]] = wd.player;
@@ -72,16 +81,16 @@ void game_loop(void)
 void render_map(void)
 {
     clear();
-    for (int i = 0; i < length(wd.map); i++)
+    for (int i = 0; i < wd.map.size(); i++)
     {
-        for (int j = 0; j < length(wd.map[i]); j++)
+        for (int j = 0; j < wd.map[i].size(); j++)
         {
-            printf("%c ", wd.map[i][j]);
+            std::cout << wd.map[i][j] << " ";
         }
-        printf("\n");
+        std::cout << std::endl;
     }
-    printf("(%d,%d)\n", wd.position[0], wd.position[1]);
-    printf("%d\n", wd.score);
+    std::cout << "(" << wd.position[0] << "," << wd.position[1] << ")" << std::endl;
+    std::cout <<  wd.score << std::endl;
 }
 
 void movement(int delta_x, int delta_y)
@@ -121,7 +130,7 @@ void next_map(void)
     wd.world_number++;
     switch (wd.world_number)
     {
-        case 1: // only defined as one since there is no good way to get the total map count
+        case 5: // only defined as it is since there is no good way to get the total map count
             disp("You win!", false);
             wd.active = false;
             
