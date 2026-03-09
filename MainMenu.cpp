@@ -5,7 +5,7 @@
  */
 
 #include "SkyesUtils.hpp"
-#include "miniaudio.h"
+#include "miniaudio.hpp"
 #include "sounds/Sounds.h"
 #include "MainMenu.hpp"
 #include "Game.hpp"
@@ -112,7 +112,7 @@ void display_menu(void)
     {
       if (i == md.menu_index)
       {
-          std::cout << "> " << md.menu_options[i] << " <" << std::endl;
+          std::cout << "> " << md.menu_options[i] << std::endl;
       }
       else
       {

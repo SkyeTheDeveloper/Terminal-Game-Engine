@@ -25,7 +25,7 @@
     
     #define lengthof(arr) sizeof(arr) / sizeof(arr[0])
     
-    #include "miniaudio.h"
+    #include "miniaudio.hpp"
     extern ma_engine engine;
     
     void disp(std::string text, bool question);

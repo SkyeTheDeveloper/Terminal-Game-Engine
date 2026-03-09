@@ -5,7 +5,7 @@
  */
 
 #define MINIAUDIO_IMPLEMENTATION
-#include "miniaudio.h"
+#include "miniaudio.hpp"
 
 ma_result result;
 ma_engine engine;
