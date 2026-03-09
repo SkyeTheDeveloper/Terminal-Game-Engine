@@ -116,7 +116,7 @@ void display_menu(void)
       }
       else
       {
-        std::cout << md.menu_options[i] << std::endl;
+        std::cout << "  " << md.menu_options[i] << std::endl;
       }
     }
 }
